@@ -34,4 +34,4 @@ php phpunit-10.phar --testdox tests/CryptoVaultTest.php
 4. `testMalformedPayloadIsRejected` — garbage input is rejected safely instead of crashing.
 
 Take a screenshot of the terminal output (with your system clock/timestamp visible) once all
-tests show green ✔ marks — that's your Figure 4.5 evidence for Chapter 4 of the report.
+tests show green ✔ marks
