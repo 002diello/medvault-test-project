@@ -16,6 +16,22 @@ if (file_exists($autoload)) {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
         $dotenv->safeLoad();
     }
+} else {
+    $envPath = __DIR__ . '/../.env';
+    if (file_exists($envPath)) {
+        $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($lines as $line) {
+            if (strpos(trim($line), '#') === 0) continue;
+            list($name, $value) = explode('=', $line, 2) + [NULL, NULL];
+            if ($name !== null && $value !== null) {
+                $name = trim($name);
+                $value = trim($value);
+                putenv(sprintf('%s=%s', $name, $value));
+                $_ENV[$name] = $value;
+                $_SERVER[$name] = $value;
+            }
+        }
+    }
 }
 
 function env_value(string $key, ?string $default = null): ?string
