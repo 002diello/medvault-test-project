@@ -25,7 +25,7 @@ function getVaultKey(): string
 
 function vaultEncrypt(string $plaintext, string $key): string
 {
-    $iv = random_bytes(12);
+    $iv = random_bytes(12);              //Randomly generated IV and encrypted using AES-256-GCM
     $tag = '';
 
     $ciphertext = openssl_encrypt(

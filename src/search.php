@@ -6,7 +6,7 @@ require_once __DIR__ . '/db_config_pdo.php';
 /**
  * Encodes output for safe HTML display.
  */
-function e(string $value): string
+function e(string $value): string           //XSS prevention
 {
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
@@ -38,7 +38,7 @@ if ($keyword === '' || mb_strlen($keyword, 'UTF-8') > 100) {
 }
 
 try {
-    $stmt = $pdo->prepare(
+    $stmt = $pdo->prepare(                      //PDO statement
         "SELECT id, name, illness_history
          FROM patient_records
          WHERE name LIKE :keyword ESCAPE '\\\\'

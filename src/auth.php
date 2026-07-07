@@ -27,7 +27,7 @@ if ($charLength < 12 || $charLength > 128 || $byteLength > 512) {
 }
 
 try {
-    $stmt = $pdo->prepare(
+    $stmt = $pdo->prepare(                  //PDO statement
         "SELECT id, username, auth_key_hash, role
          FROM staff_credentials
          WHERE username = :username
@@ -40,7 +40,7 @@ try {
 
     $user = $stmt->fetch();
 
-    if (!$user || !password_verify($inputKey, (string) $user['auth_key_hash'])) {
+    if (!$user || !password_verify($inputKey, (string) $user['auth_key_hash'])) {       //password verification 
         http_response_code(401);
         exit('Access denied.');
     }
